@@ -6,9 +6,12 @@
     ```bash
     pip install -r requirements.txt
     ```
-4. Запускаешь проект
+4. Билдишь фронт (см front).
+5. Запускаешь проект
     ```bash
-    python3 main.py
+    python3 main.py # без hot reload
+    # или
+    FLASK_APP=main.py FLASK_ENV=development flask run --port 8081 # с hot reload
     ```
 
 Пиши если не получается

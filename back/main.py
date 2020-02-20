@@ -1,11 +1,17 @@
-from flask import Flask, escape, request
+import os
+from flask import Flask, render_template
 
-app = Flask(__name__)
+path = os.path.join('.', '..', 'front', 'build')
+abs_path = os.path.abspath(path)
+abs_static = os.path.join(abs_path, 'static')
+
+app = Flask(__name__, static_folder=abs_static, template_folder=abs_path)
 
 
 @app.route('/')
 def hello():
-    name = request.args.get("name", "World")
-    return f'Hello, {escape(name)}!'
+    return render_template('index.html')
 
-app.run(host='0.0.0.0')
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8081)
