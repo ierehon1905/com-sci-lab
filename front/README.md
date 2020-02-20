@@ -1,3 +1,21 @@
+## Как, что, а!?
+1. Перейти в директорию front (в консоли)
+2. Установить зависимости
+    ```bash
+    yarn
+    ```
+3. Запустить проект
+    ```bash
+    yarn start
+    ```
+
+### Билд
+    ```bash
+    yarn build
+    ```
+За более детальной инфой см описание ниже
+
+-----------
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
