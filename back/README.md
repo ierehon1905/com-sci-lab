@@ -11,7 +11,7 @@
     ```bash
     python3 main.py # без hot reload
     # или
-    FLASK_APP=main.py FLASK_ENV=development flask run --port 8081 # с hot reload
+    FLASK_APP=app.py FLASK_ENV=development flask run --port 8081 # с hot reload
     ```
 
 Пиши если не получается

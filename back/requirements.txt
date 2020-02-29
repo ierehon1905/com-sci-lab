@@ -1,2 +1,5 @@
 Flask
 flask-cors
+# Хз на счет этой
+eth-account
+web3
