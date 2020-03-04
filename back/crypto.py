@@ -1,13 +1,20 @@
 from eth_account import Account
-from web3.auto.infura import w3
 import os
+from web3 import Web3
+
+w3 = Web3(Web3.HTTPProvider('https://ropsten.infura.io/v3/48f2e1b1628c4a7786576bb5505de814'))
 
 # Секреты не пушим
 print(os.environ['WEB3_INFURA_PROJECT_ID'])
 
-acct = Account.create('DIMA PIDOR VONUCHIY')
+# acct = Account.create('test acc')
+# print(acct.address)
+# print(acct.key)
 
-print(acct.address)
-print(acct.key)
+# print(w3.eth.blockNumber)
+# print(w3.eth.getBlock('latest'))
 
-print(w3.eth.blockNumber)
+print(w3.isAddress('0x0f551e8e47b311F4b82Bad8e90e5Ef5D6f457528'))
+print(w3.eth.getBalance('0x0f551e8e47b311F4b82Bad8e90e5Ef5D6f457528', 'latest'))
+print(w3.eth.defaultAccount)
+print(w3.eth.gasPrice)

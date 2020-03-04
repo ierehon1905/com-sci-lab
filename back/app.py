@@ -20,5 +20,12 @@ def test():
     return 'test'
 
 
+@app.route('/create-acc')
+def create_acc():
+    from eth_account import Account
+    acc = Account.create()
+    return acc.address
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8081)
