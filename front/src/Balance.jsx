@@ -26,7 +26,6 @@ export const Balance = () => {
     }
 
     const balanceHandler = () => {
-        // setBalance(null)
         setIsFetching(true)
         fetch(`${HOST}/get-balance/${inputValue}`)
             .then(res => res.text())

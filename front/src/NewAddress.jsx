@@ -33,7 +33,7 @@ export const NewAddress = () => {
     return (
         <div className="block new-address">
             <label htmlFor="random-secret-input">
-                Получить новый адрес адреса:
+                Получить новый адрес:
             </label>
             <input
                 type="text"
