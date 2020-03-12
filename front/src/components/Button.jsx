@@ -1,9 +1,21 @@
 import React from "react"
 
-export const Button = ({ clickHandler, wallet }) => {
+/**
+ *
+ * @param {{onClick : Function, text: import("react").ReactChild, progress: boolean}} param0
+ */
+export const Button = ({ onClick, text, progress }) => {
+    let className = "button-styled"
+    if (progress) {
+        className += " button-styled__disabled"
+    }
+
     return (
-        <button onClick={clickHandler}>
-            <p>{wallet ? "DeleteWallet" : "CreateWallet"}</p>
+        <button
+            onClick={onClick}
+            className={className}
+            disabled={progress}>
+            {text}
         </button>
     )
 }
