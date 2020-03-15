@@ -34,25 +34,36 @@ export const Balance = () => {
                 setBalance(res)
                 setIsFetching(false)
             })
+            .catch(err => {
+                setBalance("Произошла ошибка")
+                setIsFetching(false)
+            })
     }
 
+    const currency = /\d+(\.\d+)?/.test(balance) ? " wei" : ""
+
     return (
-        <div className="block balance">
+        <form className="block balance">
             <label htmlFor="balance-input">Получить баланс адреса:</label>
             <input
                 type="text"
                 id="balance-input"
+                autoComplete="on"
                 className="input-styled"
                 onChange={inputHandler}
                 value={inputValue}
-                placeholder="Адрес"
+                placeholder="Адрес: 0x0f551..."
             />
             <Button
                 text="Получить"
+                type="submit"
                 progress={isFetching}
                 onClick={balanceHandler}
             />
-            <Amount isFetching={isFetching}>{balance}</Amount>
-        </div>
+            <Amount isFetching={isFetching}>
+                {balance}
+                {currency}
+            </Amount>
+        </form>
     )
 }

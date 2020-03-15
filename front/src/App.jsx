@@ -5,6 +5,7 @@ import { getHost, HOST } from "./utils/api"
 
 import { NewAddress } from "./NewAddress"
 import { Balance } from "./Balance"
+import { Block } from "./Block"
 
 const App = () => {
     return (
@@ -16,6 +17,9 @@ const App = () => {
                 </section>
                 <section>
                     <Balance />
+                </section>
+                <section>
+                    <Block />
                 </section>
             </main>
         </div>
