@@ -2,9 +2,9 @@ import React from "react"
 
 /**
  *
- * @param {{onClick : Function, text: import("react").ReactChild, progress: boolean}} param0
+ * @param {{onClick : Function, text: import("react").ReactChild, progress: boolean, type: string}} param0
  */
-export const Button = ({ onClick, text, progress }) => {
+export const Button = ({ onClick, text, progress, type = "button" }) => {
     let className = "button-styled"
     if (progress) {
         className += " button-styled__disabled"
@@ -12,6 +12,7 @@ export const Button = ({ onClick, text, progress }) => {
 
     return (
         <button
+            type={type}
             onClick={onClick}
             className={className}
             disabled={progress}>

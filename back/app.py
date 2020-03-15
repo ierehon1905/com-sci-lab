@@ -16,11 +16,6 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/test')
-def test():
-    return 'test'
-
-
 @app.route('/create-acc', methods=['GET', 'POST'])
 def create_acc():
     if request.method == 'POST':
@@ -34,6 +29,12 @@ def get_balance(address=None):
     if address is None:
         return 'Пустой адрес'
     return str(crypto.get_balance(address))
+
+
+@app.route('/get-block')
+@app.route('/get-block/<block>')
+def get_block(block):
+    return crypto.get_block(block)
 
 
 if __name__ == "__main__":

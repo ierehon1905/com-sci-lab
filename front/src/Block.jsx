@@ -1,61 +1,63 @@
 import React, { useState } from "react"
 
 import { Button } from "./components/Button"
+import { HOST } from "./utils/api"
 import { Amount } from "./Balance"
-import { getHost, HOST } from "./utils/api"
 
-export const NewAddress = () => {
+export const Block = () => {
     const [inputValue, setInput] = useState("")
     const [isFetching, setIsFetching] = useState(false)
     /**
-     * @type {[{key: string, address: string}, React.Dispatch<any>]}
+     * @type {[ {timestamp: number, difficulty: number, number: number} | string, any]}
      */
-    const [response, setResponse] = useState(null)
+    const [blockInfo, setBlockInfo] = useState(null)
 
     const inputHandler = e => {
         setInput(e.target.value)
+        console.log(inputValue)
     }
 
-    const clickHandler = () => {
-        setResponse(null)
+    const blockHandler = () => {
         setIsFetching(true)
-        fetch(`${HOST}/create-acc`, {
-            method: "POST",
-        })
+        fetch(`${HOST}/get-block/${inputValue}`)
             .then(res => res.json())
             .then(res => {
                 console.log(res)
-                setResponse(res)
+                setBlockInfo(res)
                 setIsFetching(false)
             })
             .catch(err => {
-                setResponse("Произошла ошибка")
+                setBlockInfo("Произошла ошибка")
                 setIsFetching(false)
             })
     }
 
     return (
-        <form className="block new-address">
-            <label htmlFor="random-secret-input">Получить новый адрес:</label>
+        <form className="block balance">
+            <label htmlFor="balance-input">Информацию о блоке:</label>
             <input
                 type="text"
-                id="random-secret-input"
+                id="block-input"
+                autoComplete="on"
                 className="input-styled"
                 onChange={inputHandler}
                 value={inputValue}
-                placeholder="Доп соль"
+                placeholder="latest или 12345"
+                defaultValue="latest"
             />
             <Button
                 text="Получить"
                 type="submit"
-                onClick={clickHandler}
                 progress={isFetching}
+                onClick={blockHandler}
             />
             <Amount isFetching={isFetching}>
-                {response && (
+                {typeof blockInfo !== "string" && blockInfo !== null && (
                     <>
-                        Адрес: {response.address} <br />
-                        Ключ: {response.key}
+                        Номер {blockInfo.number} <br />
+                        Сложность {blockInfo.difficulty} <br/>
+                        Дата{" "}
+                        {new Date(blockInfo.timestamp * 1000).toLocaleString()}
                     </>
                 )}
             </Amount>

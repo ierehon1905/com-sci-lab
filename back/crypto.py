@@ -1,9 +1,10 @@
 from eth_account import Account
 import os
-from web3 import Web3
+from web3 import Web3, exceptions
 from typing import Union
 
 w3 = Web3(Web3.HTTPProvider('https://ropsten.infura.io/v3/48f2e1b1628c4a7786576bb5505de814'))
+
 
 # # Секреты не пушим
 # print(os.environ['WEB3_INFURA_PROJECT_ID'])
@@ -20,11 +21,28 @@ w3 = Web3(Web3.HTTPProvider('https://ropsten.infura.io/v3/48f2e1b1628c4a7786576b
 # print(w3.eth.defaultAccount)
 # print(w3.eth.gasPrice)
 
-def get_balance(address : str):
-    print('Getting balance for ', address)
-    return w3.eth.getBalance(address, 'latest')
+def get_balance(address: str):
+    try:
+        print('Getting balance for ', address)
+        return w3.eth.getBalance(address, 'latest')
+    except exceptions.InvalidAddress:
+        return 'Неверный адрес'
 
 
 def create_acc(secret: str):
     acc = Account.create(secret)
     return {"key": w3.toHex(acc.key), "address": acc.address}
+
+
+def get_block(block_number: str):
+    if block_number.isnumeric():
+        block_number = int(block_number)
+    else:
+        block_number = 'latest'
+    block = w3.eth.getBlock(block_number)
+    d = dict(
+        timestamp=block['timestamp'],
+        number=block['number'],
+        difficulty=block['difficulty']
+    )
+    return d
