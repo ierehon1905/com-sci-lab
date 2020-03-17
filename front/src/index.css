@@ -1,5 +1,7 @@
 body {
+    /* Тело без отступов */
     margin: 0;
+    /* Шрифты */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
         "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
         "Helvetica Neue", sans-serif;
@@ -7,36 +9,49 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* Основной компонент */
 .App-main {
-    /* text-align: center; */
-    /* background-color: #; */
     min-height: 100vh;
-    /* display: flex; */
     padding: 1em;
     box-sizing: border-box;
+    /* Отображаем главный каркас как сетку */
     display: grid;
+    /* с двумя столбцами */
     grid-template-columns: 1fr 1fr;
+    /* с авто расположением элементов в ряд (слева направо, сверху вниз) */
     grid-auto-flow: row;
+    /* Ячейка по центру горизонтально и вертикально */
     align-items: center;
-    /* align-content: center; */
-    /* justify-content: center; */
     justify-items: center;
-    /* font-size: calc(10px + 2vmin); */
+    /* Цвет текста */
     color: black;
 }
 
+/* Стили кнопка */
 .button-styled {
+    /* внутренние отступы */
     padding: 6px 12px;
-    border: 0;
+    /* Без границ */
+    border: none;
+    /* Радиус краев */
     border-radius: 8px;
+    /* Отображение курсора над кнопкой (Рука с пальцем) */
     cursor: pointer;
+    /* Тень */
     box-shadow: 0 0 5px 1px #cfcfcf;
+    /* Цвет фона */
+    background-color: white;
 }
+
+/* Стили отключенной кнопки */
 .button-styled__disabled {
+    /* Серый фон */
     background-color: #cfcfcf;
+    /* Курсор стрелкой обычной */
     cursor: default;
 }
 
+/* Стилизованное поле ввода */
 .input-styled {
     box-shadow: 0 0 5px 1px #cfcfcf;
     padding: 6px 12px;
@@ -45,26 +60,38 @@ body {
 }
 
 .block {
+    /* Отображать как inline-flex значить отображать как flex без переноса строк.
+    flex позволяет рисовать элементы вдоль оси (можно с переносами "строк") */
     display: inline-flex;
+    /* Направление оси колонка (столбик) */
     flex-direction: column;
+    /* Минимальная ширина */
     min-width: 18em;
 }
 
-/* .balance {
-} */
-
+/* Все непосредственные дети элемента block
+то есть первые дети */
 .block > * {
+    /* Отступ снизу */
     margin-bottom: 0.7em;
 }
 
+/* Отображение контента который грузится */
 .amount {
+    /* Относительное позиционирование (относительно обычного) */
     position: relative;
+    /* Изначальный (когда не загрузилось) сдвиг относительно нормального положения вверх на 25 пикселей */
     top: -25px;
+    /* Плавное изменение позиции на протяжении 200мс по спец функции, прозрачность аналогично */
     transition: top 0.2s ease-out, opacity 0.1s ease;
+    /* Изначальная (когда не загрузилось) прозрачность (полностью прозрачна) */
     opacity: 0;
 }
 
+/* Отображение когда загрузилось */
 .amount__visible {
+    /* Сдвиг 0 (то есть обычный) */
     top: 0;
+    /* Видимость 1 (то есть обычный, полная видимость) */
     opacity: 1;
 }

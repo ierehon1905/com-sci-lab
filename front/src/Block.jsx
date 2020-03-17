@@ -4,6 +4,11 @@ import { Button } from "./components/Button"
 import { HOST } from "./utils/api"
 import { Amount } from "./Balance"
 
+// Для более детального описания см файл Balance.jsx
+
+/**
+ * Компонент для отображения информации о блоке в блокчейне
+ */
 export const Block = () => {
     const [inputValue, setInput] = useState("")
     const [isFetching, setIsFetching] = useState(false)
@@ -52,11 +57,17 @@ export const Block = () => {
                 onClick={blockHandler}
             />
             <Amount isFetching={isFetching}>
+                {/* Благодаря тому, как js выполняет сравнения 
+                Мы можем написать логическое выражение и через оператор && "и"
+                в конце добавить JSX элемент (на самом деле что угодно),
+                если выражение истинно вернется последний элемент (у нас JSX элемент)*/}
                 {typeof blockInfo !== "string" && blockInfo !== null && (
                     <>
                         Номер {blockInfo.number} <br />
-                        Сложность {blockInfo.difficulty} <br/>
+                        Сложность {blockInfo.difficulty} <br />
                         Дата{" "}
+                        {/* Приводим количество секунд с ~1971 в дату
+                        новая Дата(миллисекунды с ~1971).к местной строке()*/}
                         {new Date(blockInfo.timestamp * 1000).toLocaleString()}
                     </>
                 )}

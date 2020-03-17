@@ -2,8 +2,13 @@ import React, { useState } from "react"
 
 import { Button } from "./components/Button"
 import { Amount } from "./Balance"
-import { getHost, HOST } from "./utils/api"
+import { HOST } from "./utils/api"
 
+// Для более детального описания см файл Balance.jsx
+
+/**
+ * Компонент для отображения деталей сгенерированного адреса
+ */
 export const NewAddress = () => {
     const [inputValue, setInput] = useState("")
     const [isFetching, setIsFetching] = useState(false)
@@ -20,9 +25,17 @@ export const NewAddress = () => {
         setResponse(null)
         setIsFetching(true)
         fetch(`${HOST}/create-acc`, {
+            // Указываем метод запроса
             method: "POST",
+            // У POST запросов может быть тело
+            // Кладем туда объект с ключом secret
+            body: JSON.stringify({
+                secret: inputValue,
+            }),
+            // Указываем заголовка запроса в виде вложенного массива строк
+            headers: [["Content-Type", "application/json"]],
         })
-            .then(res => res.json())
+            .then(res => res.json()) // ответ призодит в JSON. Парсим
             .then(res => {
                 console.log(res)
                 setResponse(res)
@@ -52,6 +65,7 @@ export const NewAddress = () => {
                 progress={isFetching}
             />
             <Amount isFetching={isFetching}>
+                {/* См Block.js */}
                 {response && (
                     <>
                         Адрес: {response.address} <br />
